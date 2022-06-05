@@ -2,26 +2,15 @@
 var todayDate = moment().format('dddd, MMM Do YYYY');
 $("#currentDay").html(todayDate);
 
-$(document).ready(function () {
-  // saveBtn click listener 
-  $(".saveBtn").on("click", function () {
-    // Get nearby values of the description in JQuery
-    var text = $(this).siblings(".description").val();
-    var time = $(this).parent().attr("id");
-
-    // Save text in local storage
-    localStorage.setItem(time, text);
-  })
-
+  // track live time
   function timeTracker() {
-    //get current number of hours.
     var timeNow = moment().hour();
 
-    // loop over time blocks
+    // looping time-blocks
     $(".time-block").each(function () {
-      var blockTime = parseInt($(this).attr("id").split("hour")[1]);
+      var blockTime = parseInt($(this).attr("id").split("h")[1]);
 
-      // To check the time and add the classes for background indicators
+      // show background color for past, future, present
       if (blockTime < timeNow) {
         $(this).removeClass("future");
         $(this).removeClass("present");
@@ -41,17 +30,25 @@ $(document).ready(function () {
     })
   }
 
-  // Get item from local storage if any
-  $("#hour8 .description").val(localStorage.getItem("hour8"));
-  $("#hour9 .description").val(localStorage.getItem("hour9"));
-  $("#hour10 .description").val(localStorage.getItem("hour10"));
-  $("#hour11 .description").val(localStorage.getItem("hour11"));
-  $("#hour12 .description").val(localStorage.getItem("hour12"));
-  $("#hour13 .description").val(localStorage.getItem("hour13"));
-  $("#hour14 .description").val(localStorage.getItem("hour14"));
-  $("#hour15 .description").val(localStorage.getItem("hour15"));
-  $("#hour16 .description").val(localStorage.getItem("hour16"));
-  $("#hour17 .description").val(localStorage.getItem("hour17"));
+  // saveBtn click listener
+  $(document).ready(function () { 
+    $(".saveBtn").on("click", function () {
+      var text = $(this).siblings(".task").val();
+      var time = $(this).parent().attr("id");
+  
+      localStorage.setItem(time, text);
+    })
+
+  // Grab info from local
+  $("#h9 .task").val(localStorage.getItem("h9"));
+  $("#h10 .task").val(localStorage.getItem("h10"));
+  $("#h11 .task").val(localStorage.getItem("h11"));
+  $("#h12 .task").val(localStorage.getItem("h12"));
+  $("#h13 .task").val(localStorage.getItem("h13"));
+  $("#h14 .task").val(localStorage.getItem("h14"));
+  $("#h15 .task").val(localStorage.getItem("h15"));
+  $("#h16 .task").val(localStorage.getItem("h16"));
+  $("#h17 .task").val(localStorage.getItem("h17"));
 
   timeTracker();
 })
